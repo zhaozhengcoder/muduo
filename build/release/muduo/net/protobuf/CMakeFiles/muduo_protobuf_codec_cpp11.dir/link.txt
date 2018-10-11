@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../lib/libmuduo_protobuf_codec_cpp11.a  CMakeFiles/muduo_protobuf_codec_cpp11.dir/ProtobufCodecLite.cc.o
+/usr/bin/ranlib ../../../lib/libmuduo_protobuf_codec_cpp11.a
