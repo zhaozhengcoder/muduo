@@ -8,21 +8,19 @@
 
 namespace
 {
-
-class IgnoreSigPipe
-{
- public:
-  IgnoreSigPipe()
+  class IgnoreSigPipe
   {
-    ::signal(SIGPIPE, SIG_IGN);
+  public:
+    IgnoreSigPipe()
+    {
+      ::signal(SIGPIPE, SIG_IGN);
+    }
+  } initObj;
+
+  bool isSelfConnection(const Socket& sock)
+  {
+    return sock.getLocalAddr() == sock.getPeerAddr();
   }
-} initObj;
-
-bool isSelfConnection(const Socket& sock)
-{
-  return sock.getLocalAddr() == sock.getPeerAddr();
-}
-
 }
 
 TcpStream::TcpStream(Socket&& sock)
