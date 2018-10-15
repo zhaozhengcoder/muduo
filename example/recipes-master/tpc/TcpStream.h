@@ -12,7 +12,7 @@ typedef std::unique_ptr<TcpStream> TcpStreamPtr;
 // A blocking TCP stream
 class TcpStream : noncopyable
 {
- public:
+public:
   explicit TcpStream(Socket&& sock);  // sock must be connected
   ~TcpStream() = default;
   TcpStream(TcpStream&&) = default;
@@ -32,7 +32,7 @@ class TcpStream : noncopyable
   void setTcpNoDelay(bool on);
   void shutdownWrite();
 
- private:
+private:
   static TcpStreamPtr connectInternal(const InetAddress& serverAddr, const InetAddress* localAddr);
   Socket sock_;
 };

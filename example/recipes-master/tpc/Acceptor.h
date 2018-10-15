@@ -11,7 +11,7 @@ typedef std::unique_ptr<TcpStream> TcpStreamPtr;
 
 class Acceptor : noncopyable
 {
- public:
+public:
   explicit Acceptor(const InetAddress& listenAddr);
 
   ~Acceptor() = default;
@@ -21,7 +21,7 @@ class Acceptor : noncopyable
   // thread safe
   TcpStreamPtr accept();
 
- private:
+private:
   Socket listenSock_;
 };
 

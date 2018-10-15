@@ -3,7 +3,7 @@
 
 class StringArg
 {
- public:
+public:
   StringArg(const char* str)
     : str_(str)
   { }
@@ -14,6 +14,6 @@ class StringArg
 
   const char* c_str() const { return str_; }
 
- private:
+private:
   const char* str_;
 };

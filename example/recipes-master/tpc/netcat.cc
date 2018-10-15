@@ -86,7 +86,7 @@ int main(int argc, const char* argv[])
   if (strcmp(argv[1], "-l") == 0)
   {
     // 接受tcp连接
-    std::unique_ptr<Acceptor> acceptor(new Acceptor(InetAddress(port)));
+    std::unique_ptr<Acceptor> acceptor(new Acceptor(InetAddress(port)));    // socket 对象 只是在移动，而没有被拷贝，这是一个很好的写法
     TcpStreamPtr stream(acceptor->accept());
 
     // 收到连接
