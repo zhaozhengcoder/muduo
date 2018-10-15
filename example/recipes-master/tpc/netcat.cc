@@ -41,7 +41,7 @@ void run(TcpStreamPtr stream)
     int nr = 0;
 
     // 如果nr的返回值是0，那么退出循环
-    while ( (nr = stream->receiveSome(buf, sizeof(buf))) > 0)
+    while ((nr = stream->receiveSome(buf, sizeof(buf))) > 0)
     {
       int nw = write_n(STDOUT_FILENO, buf, nr);
       // 跳出循环 ，error 收发不一致

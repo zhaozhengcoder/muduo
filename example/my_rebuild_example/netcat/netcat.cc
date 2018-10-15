@@ -1,5 +1,78 @@
 #include <iostream>
+#include <memory>
+#include <thread>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+
+#include "Acceptor.h"
+#include "InetAddress.h"
+#include "TcpStream.h"
+
 using namespace std;
+
+int write_n(int fd, const void* buf, int length)
+{
+    int written = 0;
+    while (written < length)
+    {
+        int nw = ::write(fd, static_cast<const char*>(buf) + written, length - written);
+        if (nw > 0)
+        {
+            written += nw;
+        }
+        else if (nw == 0)
+        {
+            break;  // EOF
+        }
+        else if (errno != EINTR)
+        {
+            perror("write");
+            break;
+        }
+    }
+    return written;
+}
+
+void run(TcpStreamPtr stream)
+{
+    std::thread thr([&stream] () {
+        char buf[8192];
+        int nr = 0;
+
+        // 如果nr的返回值是0，那么退出循环
+        while ((nr = stream->receiveSome(buf, sizeof(buf))) > 0)
+        {
+        int nw = write_n(STDOUT_FILENO, buf, nr);
+        // 跳出循环 ，error 收发不一致
+        if (nw < nr)
+        {
+            cout<<"[error] [child thread]: read > write "<<endl;
+            break;
+        }
+        }
+        ::exit(0);  // should somehow notify main thread instead
+    });
+
+    // 主线程执行下面的逻辑 ,从标准输入读取，然后发送到socket上面
+    // 如果读一个文件，读到文件结尾的时候，会出现read的返回值等于0，然后跳出while
+    char buf[8192];
+    int nr = 0;
+    while ( (nr = ::read(STDIN_FILENO, buf, sizeof(buf))) > 0)
+    {
+        int nw = stream->sendAll(buf, nr);
+        if (nw < nr)
+        {
+        cout<<"[error] [main thread]: read > write "<<endl;
+        break;
+        }
+    }
+
+    //tcp 关闭 （调用shutdown是正确的tcp关闭的姿势）
+    //如果调用close 的话，主动方就会直接发送一个rst报文给被动方，然后被动方如果调用read的话，返回值就是-1，错误是 Connection reset by peer
+    stream->shutdownWrite();
+    thr.join();
+}
 
 int main(int argc,char ** argv)
 {
@@ -14,7 +87,8 @@ int main(int argc,char ** argv)
     {
         // 接受tcp连接
         std::unique_ptr<Acceptor> acceptor(new Acceptor(InetAddress(port)));
-        TcpStreamPtr stream(acceptor->accept());
+        TcpStreamPtr stream(acceptor->accept());                                        // typedef std::unique_ptr<TcpStream> TcpStreamPtr;  Acceptor.h 文件定义
+        
         // 收到连接
         if (stream)
         {
@@ -30,7 +104,7 @@ int main(int argc,char ** argv)
     else
     {
         InetAddress addr(port);
-        const char* hostname = argv[1];
+        const char* hostname = argv[1];    //127.0.0.1 localhost
         if (InetAddress::resolve(hostname, &addr))
         {
             // 建立tcp连接

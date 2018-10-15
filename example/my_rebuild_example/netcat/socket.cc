@@ -1,19 +1,19 @@
 #include "Socket.h"
 #include "InetAddress.h"
 
+#include <stdio.h>
 #include <assert.h>
 #include <strings.h>  // bzero
 #include <unistd.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 #include <sys/socket.h>
+#include <stdlib.h>
 
 // 匿名的namespace ，取消在文件外的可见性，约等于在前面加上 static
 namespace
 {
-
   typedef struct sockaddr SA;
-
   // 下面两个函数，想做的事情就是 sockaddr_in 到 sockaddr 的类型转化 （使用c++的方式）
   const SA* sockaddr_cast(const struct sockaddr_in* addr)
   {
@@ -26,7 +26,6 @@ namespace
     return static_cast<SA*>(static_cast<void *>(addr));
     //return static_cast<SA*>(implicit_cast<void*>(addr));                     // 下面这行是原来的代码，上面的一行是我修改之后的代码
   }
-
 }
 
 Socket::Socket(int sockfd)
