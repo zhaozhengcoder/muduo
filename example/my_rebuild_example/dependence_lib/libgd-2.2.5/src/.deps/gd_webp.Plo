@@ -1,0 +1,5 @@
+gd_webp.lo: gd_webp.c /usr/include/stdc-predef.h config.h
+
+/usr/include/stdc-predef.h:
+
+config.h:

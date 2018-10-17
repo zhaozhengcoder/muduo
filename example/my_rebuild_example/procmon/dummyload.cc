@@ -5,9 +5,7 @@
 #include <muduo/base/Thread.h>
 #include <muduo/base/Timestamp.h>
 #include <muduo/net/EventLoop.h>
-
 #include <boost/ptr_container/ptr_vector.hpp>
-
 #include <math.h>
 #include <stdio.h>
 
@@ -163,9 +161,7 @@ int main(int argc, char* argv[])
       sawtooth();
     }
     break;
-
     // TODO: square and triangle waves
-
     default:
     break;
   }

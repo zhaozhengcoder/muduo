@@ -6,7 +6,8 @@ MUDUO_LIBRARY = $(MUDUO_DIRECTORY)/lib
 CXXFLAGS = -I$(MUDUO_INCLUDE) -I/usr/local/libgd/include
 LDFLAGS = -L$(MUDUO_LIBRARY) -lmuduo_http -lmuduo_net_cpp11 -lmuduo_base_cpp11  -lmuduo_inspect -lpthread -lrt 
 
-# 刚才一直报错，报错的原因是连接静态库的顺序出错了 把lmuduo_http 放到最前面，就可以了
+# 刚才一直报错，报错的原因是连接静态库的顺序出错了 把lmuduo_http 放到最前面，就可以了 
+# 原因是lib的相互依赖
 
 cc = g++
 src = plot.cc procmon.cc
