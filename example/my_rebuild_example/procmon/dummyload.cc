@@ -71,7 +71,7 @@ void load(int percent)
   int err = 2*percent - 100;
   int count = 0;
 
-  // 把一秒钟分成了 100 份，每份10ms
+  // 把一秒钟分成了 100 份，每份10ms，也就是0.001s
   for (int i = 0; i < 100; ++i)
   {
     bool busy = false;
