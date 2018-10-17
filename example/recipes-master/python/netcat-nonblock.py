@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: UTF-8 -*-
 
 import errno
 import fcntl
@@ -36,7 +37,7 @@ def relay(sock):
     while not done:
         events = poll.poll(10000)  # 10 seconds
         for fileno, event in events:
-            if event & select.POLLIN:
+            if event & select.POLLIN:                # 与运算
                 if fileno == sock.fileno():
                     data = sock.recv(8192)
                     if data:
@@ -71,8 +72,6 @@ def relay(sock):
                         socketEvents &= ~select.POLLOUT
                         poll.register(sock, socketEvents)
                         poll.register(sys.stdin, select.POLLIN)
-
-
 
 def main(argv):
     if len(argv) < 3:

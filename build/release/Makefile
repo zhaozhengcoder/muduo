@@ -218,6 +218,19 @@ threadpool_test/fast:
 .PHONY : threadpool_test/fast
 
 #=============================================================================
+# Target rules for targets named threadlocalsingleton_test
+
+# Build rule for target.
+threadlocalsingleton_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 threadlocalsingleton_test
+.PHONY : threadlocalsingleton_test
+
+# fast build rule for target.
+threadlocalsingleton_test/fast:
+	$(MAKE) -f muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/build.make muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/build
+.PHONY : threadlocalsingleton_test/fast
+
+#=============================================================================
 # Target rules for targets named processinfo_test
 
 # Build rule for target.
@@ -294,19 +307,6 @@ threadlocal_test: cmake_check_build_system
 threadlocal_test/fast:
 	$(MAKE) -f muduo/base/tests/CMakeFiles/threadlocal_test.dir/build.make muduo/base/tests/CMakeFiles/threadlocal_test.dir/build
 .PHONY : threadlocal_test/fast
-
-#=============================================================================
-# Target rules for targets named threadlocalsingleton_test
-
-# Build rule for target.
-threadlocalsingleton_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 threadlocalsingleton_test
-.PHONY : threadlocalsingleton_test
-
-# fast build rule for target.
-threadlocalsingleton_test/fast:
-	$(MAKE) -f muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/build.make muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/build
-.PHONY : threadlocalsingleton_test/fast
 
 #=============================================================================
 # Target rules for targets named exception_test
@@ -398,6 +398,19 @@ mutex_test: cmake_check_build_system
 mutex_test/fast:
 	$(MAKE) -f muduo/base/tests/CMakeFiles/mutex_test.dir/build.make muduo/base/tests/CMakeFiles/mutex_test.dir/build
 .PHONY : mutex_test/fast
+
+#=============================================================================
+# Target rules for targets named gzipfile_test
+
+# Build rule for target.
+gzipfile_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gzipfile_test
+.PHONY : gzipfile_test
+
+# fast build rule for target.
+gzipfile_test/fast:
+	$(MAKE) -f muduo/base/tests/CMakeFiles/gzipfile_test.dir/build.make muduo/base/tests/CMakeFiles/gzipfile_test.dir/build
+.PHONY : gzipfile_test/fast
 
 #=============================================================================
 # Target rules for targets named logfile_test
@@ -634,6 +647,19 @@ tcpclient_reg3/fast:
 .PHONY : tcpclient_reg3/fast
 
 #=============================================================================
+# Target rules for targets named tcpclient_reg1
+
+# Build rule for target.
+tcpclient_reg1: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tcpclient_reg1
+.PHONY : tcpclient_reg1
+
+# fast build rule for target.
+tcpclient_reg1/fast:
+	$(MAKE) -f muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/build.make muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/build
+.PHONY : tcpclient_reg1/fast
+
+#=============================================================================
 # Target rules for targets named echoclient_unittest
 
 # Build rule for target.
@@ -671,19 +697,6 @@ eventloop_unittest: cmake_check_build_system
 eventloop_unittest/fast:
 	$(MAKE) -f muduo/net/tests/CMakeFiles/eventloop_unittest.dir/build.make muduo/net/tests/CMakeFiles/eventloop_unittest.dir/build
 .PHONY : eventloop_unittest/fast
-
-#=============================================================================
-# Target rules for targets named tcpclient_reg1
-
-# Build rule for target.
-tcpclient_reg1: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tcpclient_reg1
-.PHONY : tcpclient_reg1
-
-# fast build rule for target.
-tcpclient_reg1/fast:
-	$(MAKE) -f muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/build.make muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/build
-.PHONY : tcpclient_reg1/fast
 
 #=============================================================================
 # Target rules for targets named channel_test
@@ -775,6 +788,19 @@ inetaddress_unittest: cmake_check_build_system
 inetaddress_unittest/fast:
 	$(MAKE) -f muduo/net/tests/CMakeFiles/inetaddress_unittest.dir/build.make muduo/net/tests/CMakeFiles/inetaddress_unittest.dir/build
 .PHONY : inetaddress_unittest/fast
+
+#=============================================================================
+# Target rules for targets named zlibstream_unittest
+
+# Build rule for target.
+zlibstream_unittest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 zlibstream_unittest
+.PHONY : zlibstream_unittest
+
+# fast build rule for target.
+zlibstream_unittest/fast:
+	$(MAKE) -f muduo/net/tests/CMakeFiles/zlibstream_unittest.dir/build.make muduo/net/tests/CMakeFiles/zlibstream_unittest.dir/build
+.PHONY : zlibstream_unittest/fast
 
 #=============================================================================
 # Target rules for targets named muduo_protobuf_codec
@@ -2197,13 +2223,13 @@ help:
 	@echo "... muduo_base_cpp11"
 	@echo "... timezone_unittest"
 	@echo "... threadpool_test"
+	@echo "... threadlocalsingleton_test"
 	@echo "... processinfo_test"
 	@echo "... date_unittest"
 	@echo "... boundedblockingqueue_test"
 	@echo "... timestamp_unittest"
 	@echo "... fileutil_test"
 	@echo "... threadlocal_test"
-	@echo "... threadlocalsingleton_test"
 	@echo "... exception_test"
 	@echo "... asynclogging_test"
 	@echo "... blockingqueue_test"
@@ -2211,6 +2237,7 @@ help:
 	@echo "... blockingqueue_bench"
 	@echo "... atomic_unittest"
 	@echo "... mutex_test"
+	@echo "... gzipfile_test"
 	@echo "... logfile_test"
 	@echo "... logging_test"
 	@echo "... logstream_bench"
@@ -2229,10 +2256,10 @@ help:
 	@echo "... inspector_test"
 	@echo "... timerqueue_unittest"
 	@echo "... tcpclient_reg3"
+	@echo "... tcpclient_reg1"
 	@echo "... echoclient_unittest"
 	@echo "... buffer_unittest"
 	@echo "... eventloop_unittest"
-	@echo "... tcpclient_reg1"
 	@echo "... channel_test"
 	@echo "... eventloopthread_unittest"
 	@echo "... buffer_cpp11_unittest"
@@ -2240,6 +2267,7 @@ help:
 	@echo "... eventloopthreadpool_unittest"
 	@echo "... echoserver_unittest"
 	@echo "... inetaddress_unittest"
+	@echo "... zlibstream_unittest"
 	@echo "... muduo_protobuf_codec"
 	@echo "... muduo_protobuf_codec_cpp11"
 	@echo "... protobuf_rpc_wire_test"

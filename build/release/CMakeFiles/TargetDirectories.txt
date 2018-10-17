@@ -22,13 +22,13 @@
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/install/strip.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/timezone_unittest.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/threadpool_test.dir
+/home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/processinfo_test.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/date_unittest.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/boundedblockingqueue_test.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/timestamp_unittest.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/fileutil_test.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/threadlocal_test.dir
-/home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/exception_test.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/install/local.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/asynclogging_test.dir
@@ -37,6 +37,7 @@
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/blockingqueue_bench.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/atomic_unittest.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/mutex_test.dir
+/home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/gzipfile_test.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/logfile_test.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/logging_test.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/base/tests/CMakeFiles/logstream_bench.dir
@@ -82,10 +83,10 @@
 /home/zhaozheng/code_test/muduo/build/release/muduo/net/tests/CMakeFiles/rebuild_cache.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/net/tests/CMakeFiles/timerqueue_unittest.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/net/tests/CMakeFiles/tcpclient_reg3.dir
+/home/zhaozheng/code_test/muduo/build/release/muduo/net/tests/CMakeFiles/tcpclient_reg1.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/net/tests/CMakeFiles/echoclient_unittest.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/net/tests/CMakeFiles/buffer_unittest.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/net/tests/CMakeFiles/eventloop_unittest.dir
-/home/zhaozheng/code_test/muduo/build/release/muduo/net/tests/CMakeFiles/tcpclient_reg1.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/net/tests/CMakeFiles/channel_test.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/net/tests/CMakeFiles/eventloopthread_unittest.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/net/tests/CMakeFiles/edit_cache.dir
@@ -94,6 +95,7 @@
 /home/zhaozheng/code_test/muduo/build/release/muduo/net/tests/CMakeFiles/eventloopthreadpool_unittest.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/net/tests/CMakeFiles/echoserver_unittest.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/net/tests/CMakeFiles/inetaddress_unittest.dir
+/home/zhaozheng/code_test/muduo/build/release/muduo/net/tests/CMakeFiles/zlibstream_unittest.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/net/protobuf/CMakeFiles/rebuild_cache.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/net/protobuf/CMakeFiles/edit_cache.dir
 /home/zhaozheng/code_test/muduo/build/release/muduo/net/protobuf/CMakeFiles/test.dir

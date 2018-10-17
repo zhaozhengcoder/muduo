@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/plot_test.dir/plot_test.cc.o CMakeFiles/plot_test.dir/plot.cc.o  -o plot_test -rdynamic -lmuduo_base -lgd 

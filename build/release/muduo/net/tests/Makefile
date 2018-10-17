@@ -196,6 +196,21 @@ tcpclient_reg3/fast:
 .PHONY : tcpclient_reg3/fast
 
 # Convenience name for target.
+muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/rule:
+	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f CMakeFiles/Makefile2 muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/rule
+.PHONY : muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/rule
+
+# Convenience name for target.
+tcpclient_reg1: muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/rule
+
+.PHONY : tcpclient_reg1
+
+# fast build rule for target.
+tcpclient_reg1/fast:
+	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/build.make muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/build
+.PHONY : tcpclient_reg1/fast
+
+# Convenience name for target.
 muduo/net/tests/CMakeFiles/echoclient_unittest.dir/rule:
 	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f CMakeFiles/Makefile2 muduo/net/tests/CMakeFiles/echoclient_unittest.dir/rule
 .PHONY : muduo/net/tests/CMakeFiles/echoclient_unittest.dir/rule
@@ -239,21 +254,6 @@ eventloop_unittest: muduo/net/tests/CMakeFiles/eventloop_unittest.dir/rule
 eventloop_unittest/fast:
 	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/net/tests/CMakeFiles/eventloop_unittest.dir/build.make muduo/net/tests/CMakeFiles/eventloop_unittest.dir/build
 .PHONY : eventloop_unittest/fast
-
-# Convenience name for target.
-muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/rule:
-	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f CMakeFiles/Makefile2 muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/rule
-.PHONY : muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/rule
-
-# Convenience name for target.
-tcpclient_reg1: muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/rule
-
-.PHONY : tcpclient_reg1
-
-# fast build rule for target.
-tcpclient_reg1/fast:
-	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/build.make muduo/net/tests/CMakeFiles/tcpclient_reg1.dir/build
-.PHONY : tcpclient_reg1/fast
 
 # Convenience name for target.
 muduo/net/tests/CMakeFiles/channel_test.dir/rule:
@@ -359,6 +359,21 @@ inetaddress_unittest: muduo/net/tests/CMakeFiles/inetaddress_unittest.dir/rule
 inetaddress_unittest/fast:
 	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/net/tests/CMakeFiles/inetaddress_unittest.dir/build.make muduo/net/tests/CMakeFiles/inetaddress_unittest.dir/build
 .PHONY : inetaddress_unittest/fast
+
+# Convenience name for target.
+muduo/net/tests/CMakeFiles/zlibstream_unittest.dir/rule:
+	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f CMakeFiles/Makefile2 muduo/net/tests/CMakeFiles/zlibstream_unittest.dir/rule
+.PHONY : muduo/net/tests/CMakeFiles/zlibstream_unittest.dir/rule
+
+# Convenience name for target.
+zlibstream_unittest: muduo/net/tests/CMakeFiles/zlibstream_unittest.dir/rule
+
+.PHONY : zlibstream_unittest
+
+# fast build rule for target.
+zlibstream_unittest/fast:
+	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/net/tests/CMakeFiles/zlibstream_unittest.dir/build.make muduo/net/tests/CMakeFiles/zlibstream_unittest.dir/build
+.PHONY : zlibstream_unittest/fast
 
 Buffer_unittest.o: Buffer_unittest.cc.o
 
@@ -687,6 +702,33 @@ TimerQueue_unittest.cc.s:
 	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/net/tests/CMakeFiles/timerqueue_unittest.dir/build.make muduo/net/tests/CMakeFiles/timerqueue_unittest.dir/TimerQueue_unittest.cc.s
 .PHONY : TimerQueue_unittest.cc.s
 
+ZlibStream_unittest.o: ZlibStream_unittest.cc.o
+
+.PHONY : ZlibStream_unittest.o
+
+# target to build an object file
+ZlibStream_unittest.cc.o:
+	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/net/tests/CMakeFiles/zlibstream_unittest.dir/build.make muduo/net/tests/CMakeFiles/zlibstream_unittest.dir/ZlibStream_unittest.cc.o
+.PHONY : ZlibStream_unittest.cc.o
+
+ZlibStream_unittest.i: ZlibStream_unittest.cc.i
+
+.PHONY : ZlibStream_unittest.i
+
+# target to preprocess a source file
+ZlibStream_unittest.cc.i:
+	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/net/tests/CMakeFiles/zlibstream_unittest.dir/build.make muduo/net/tests/CMakeFiles/zlibstream_unittest.dir/ZlibStream_unittest.cc.i
+.PHONY : ZlibStream_unittest.cc.i
+
+ZlibStream_unittest.s: ZlibStream_unittest.cc.s
+
+.PHONY : ZlibStream_unittest.s
+
+# target to generate assembly for a file
+ZlibStream_unittest.cc.s:
+	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/net/tests/CMakeFiles/zlibstream_unittest.dir/build.make muduo/net/tests/CMakeFiles/zlibstream_unittest.dir/ZlibStream_unittest.cc.s
+.PHONY : ZlibStream_unittest.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -701,10 +743,10 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... timerqueue_unittest"
 	@echo "... tcpclient_reg3"
+	@echo "... tcpclient_reg1"
 	@echo "... echoclient_unittest"
 	@echo "... buffer_unittest"
 	@echo "... eventloop_unittest"
-	@echo "... tcpclient_reg1"
 	@echo "... channel_test"
 	@echo "... eventloopthread_unittest"
 	@echo "... edit_cache"
@@ -713,6 +755,7 @@ help:
 	@echo "... eventloopthreadpool_unittest"
 	@echo "... echoserver_unittest"
 	@echo "... inetaddress_unittest"
+	@echo "... zlibstream_unittest"
 	@echo "... Buffer_unittest.o"
 	@echo "... Buffer_unittest.i"
 	@echo "... Buffer_unittest.s"
@@ -749,6 +792,9 @@ help:
 	@echo "... TimerQueue_unittest.o"
 	@echo "... TimerQueue_unittest.i"
 	@echo "... TimerQueue_unittest.s"
+	@echo "... ZlibStream_unittest.o"
+	@echo "... ZlibStream_unittest.i"
+	@echo "... ZlibStream_unittest.s"
 .PHONY : help
 
 

@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+# -*- coding: UTF-8 -*-
 import os
 import select
 import socket
@@ -7,7 +7,7 @@ import sys
 
 def relay(sock):
     poll = select.poll()
-    poll.register(sock, select.POLLIN)
+    poll.register(sock, select.POLLIN)          #注册两个事件，一个是socket可读，一个是stdin可读
     poll.register(sys.stdin, select.POLLIN)
 
     done = False
@@ -15,13 +15,13 @@ def relay(sock):
         events = poll.poll(10000)  # 10 seconds
         for fileno, event in events:
             if event & select.POLLIN:
-                if fileno == sock.fileno():
+                if fileno == sock.fileno():     # 如果是socket可读的话
                     data = sock.recv(8192)
                     if data:
-                        sys.stdout.write(data)
+                        sys.stdout.write(data)  # 将读到的数据写到标准输出上面
                     else:
-                        done = True
-                else:
+                        done = True             # 读到0
+                else:                           # 如果是stdin可读的话 
                     assert fileno == sys.stdin.fileno()
                     data = os.read(fileno, 8192)
                     if data:

@@ -196,6 +196,21 @@ threadpool_test/fast:
 .PHONY : threadpool_test/fast
 
 # Convenience name for target.
+muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/rule:
+	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f CMakeFiles/Makefile2 muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/rule
+.PHONY : muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/rule
+
+# Convenience name for target.
+threadlocalsingleton_test: muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/rule
+
+.PHONY : threadlocalsingleton_test
+
+# fast build rule for target.
+threadlocalsingleton_test/fast:
+	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/build.make muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/build
+.PHONY : threadlocalsingleton_test/fast
+
+# Convenience name for target.
 muduo/base/tests/CMakeFiles/processinfo_test.dir/rule:
 	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f CMakeFiles/Makefile2 muduo/base/tests/CMakeFiles/processinfo_test.dir/rule
 .PHONY : muduo/base/tests/CMakeFiles/processinfo_test.dir/rule
@@ -284,21 +299,6 @@ threadlocal_test: muduo/base/tests/CMakeFiles/threadlocal_test.dir/rule
 threadlocal_test/fast:
 	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/base/tests/CMakeFiles/threadlocal_test.dir/build.make muduo/base/tests/CMakeFiles/threadlocal_test.dir/build
 .PHONY : threadlocal_test/fast
-
-# Convenience name for target.
-muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/rule:
-	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f CMakeFiles/Makefile2 muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/rule
-.PHONY : muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/rule
-
-# Convenience name for target.
-threadlocalsingleton_test: muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/rule
-
-.PHONY : threadlocalsingleton_test
-
-# fast build rule for target.
-threadlocalsingleton_test/fast:
-	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/build.make muduo/base/tests/CMakeFiles/threadlocalsingleton_test.dir/build
-.PHONY : threadlocalsingleton_test/fast
 
 # Convenience name for target.
 muduo/base/tests/CMakeFiles/exception_test.dir/rule:
@@ -404,6 +404,21 @@ mutex_test: muduo/base/tests/CMakeFiles/mutex_test.dir/rule
 mutex_test/fast:
 	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/base/tests/CMakeFiles/mutex_test.dir/build.make muduo/base/tests/CMakeFiles/mutex_test.dir/build
 .PHONY : mutex_test/fast
+
+# Convenience name for target.
+muduo/base/tests/CMakeFiles/gzipfile_test.dir/rule:
+	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f CMakeFiles/Makefile2 muduo/base/tests/CMakeFiles/gzipfile_test.dir/rule
+.PHONY : muduo/base/tests/CMakeFiles/gzipfile_test.dir/rule
+
+# Convenience name for target.
+gzipfile_test: muduo/base/tests/CMakeFiles/gzipfile_test.dir/rule
+
+.PHONY : gzipfile_test
+
+# fast build rule for target.
+gzipfile_test/fast:
+	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/base/tests/CMakeFiles/gzipfile_test.dir/build.make muduo/base/tests/CMakeFiles/gzipfile_test.dir/build
+.PHONY : gzipfile_test/fast
 
 # Convenience name for target.
 muduo/base/tests/CMakeFiles/logfile_test.dir/rule:
@@ -785,6 +800,33 @@ Fork_test.s: Fork_test.cc.s
 Fork_test.cc.s:
 	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/base/tests/CMakeFiles/fork_test.dir/build.make muduo/base/tests/CMakeFiles/fork_test.dir/Fork_test.cc.s
 .PHONY : Fork_test.cc.s
+
+GzipFile_test.o: GzipFile_test.cc.o
+
+.PHONY : GzipFile_test.o
+
+# target to build an object file
+GzipFile_test.cc.o:
+	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/base/tests/CMakeFiles/gzipfile_test.dir/build.make muduo/base/tests/CMakeFiles/gzipfile_test.dir/GzipFile_test.cc.o
+.PHONY : GzipFile_test.cc.o
+
+GzipFile_test.i: GzipFile_test.cc.i
+
+.PHONY : GzipFile_test.i
+
+# target to preprocess a source file
+GzipFile_test.cc.i:
+	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/base/tests/CMakeFiles/gzipfile_test.dir/build.make muduo/base/tests/CMakeFiles/gzipfile_test.dir/GzipFile_test.cc.i
+.PHONY : GzipFile_test.cc.i
+
+GzipFile_test.s: GzipFile_test.cc.s
+
+.PHONY : GzipFile_test.s
+
+# target to generate assembly for a file
+GzipFile_test.cc.s:
+	cd /home/zhaozheng/code_test/muduo/build/release && $(MAKE) -f muduo/base/tests/CMakeFiles/gzipfile_test.dir/build.make muduo/base/tests/CMakeFiles/gzipfile_test.dir/GzipFile_test.cc.s
+.PHONY : GzipFile_test.cc.s
 
 LogFile_test.o: LogFile_test.cc.o
 
@@ -1205,13 +1247,13 @@ help:
 	@echo "... install/strip"
 	@echo "... timezone_unittest"
 	@echo "... threadpool_test"
+	@echo "... threadlocalsingleton_test"
 	@echo "... processinfo_test"
 	@echo "... date_unittest"
 	@echo "... boundedblockingqueue_test"
 	@echo "... timestamp_unittest"
 	@echo "... fileutil_test"
 	@echo "... threadlocal_test"
-	@echo "... threadlocalsingleton_test"
 	@echo "... exception_test"
 	@echo "... install/local"
 	@echo "... asynclogging_test"
@@ -1220,6 +1262,7 @@ help:
 	@echo "... blockingqueue_bench"
 	@echo "... atomic_unittest"
 	@echo "... mutex_test"
+	@echo "... gzipfile_test"
 	@echo "... logfile_test"
 	@echo "... logging_test"
 	@echo "... logstream_bench"
@@ -1256,6 +1299,9 @@ help:
 	@echo "... Fork_test.o"
 	@echo "... Fork_test.i"
 	@echo "... Fork_test.s"
+	@echo "... GzipFile_test.o"
+	@echo "... GzipFile_test.i"
+	@echo "... GzipFile_test.s"
 	@echo "... LogFile_test.o"
 	@echo "... LogFile_test.i"
 	@echo "... LogFile_test.s"

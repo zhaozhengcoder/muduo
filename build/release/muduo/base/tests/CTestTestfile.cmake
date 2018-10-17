@@ -8,6 +8,7 @@ add_test(atomic_unittest "/home/zhaozheng/code_test/muduo/build/release/bin/atom
 add_test(date_unittest "/home/zhaozheng/code_test/muduo/build/release/bin/date_unittest")
 add_test(exception_test "/home/zhaozheng/code_test/muduo/build/release/bin/exception_test")
 add_test(fileutil_test "/home/zhaozheng/code_test/muduo/build/release/bin/fileutil_test")
+add_test(gzipfile_test "/home/zhaozheng/code_test/muduo/build/release/bin/gzipfile_test")
 add_test(logstream_test "/home/zhaozheng/code_test/muduo/build/release/bin/logstream_test")
 add_test(timestamp_unittest "/home/zhaozheng/code_test/muduo/build/release/bin/timestamp_unittest")
 add_test(timezone_unittest "/home/zhaozheng/code_test/muduo/build/release/bin/timezone_unittest")

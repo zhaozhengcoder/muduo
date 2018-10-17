@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/zhaozheng/code_test/muduo/muduo-master/examples/procmon/dummyload.cc
+muduo/base/Atomic.h
+-
+muduo/base/Condition.h
+-
+muduo/base/CurrentThread.h
+-
+muduo/base/Mutex.h
+-
+muduo/base/Thread.h
+-
+muduo/base/Timestamp.h
+-
+muduo/net/EventLoop.h
+-
+boost/ptr_container/ptr_vector.hpp
+-
+math.h
+-
+stdio.h
+-
+
