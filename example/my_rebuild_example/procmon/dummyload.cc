@@ -19,6 +19,7 @@ bool g_busy = false;
 MutexLock g_mutex;
 Condition g_cond(g_mutex);
 
+// 做一点事情，使cpu忙起来
 double busy(int cycles)
 {
   double result = 0;
@@ -36,6 +37,7 @@ double getSeconds(int cycles)
   return timeDifference(Timestamp::now(), start);
 }
 
+// 找到0.001s 可以执行多少个busy的cycle
 void findCycles()
 {
   g_cycles = 1000;
@@ -58,7 +60,8 @@ void threadFunc()
   printf("thread exit\n");
 }
 
-// this is open-loop control
+// this is open-loop control 
+// 每秒钟cpu的使用率
 void load(int percent)
 {
   percent = std::max(0, percent);
@@ -68,6 +71,7 @@ void load(int percent)
   int err = 2*percent - 100;
   int count = 0;
 
+  // 把一秒钟分成了 100 份，每份10ms
   for (int i = 0; i < 100; ++i)
   {
     bool busy = false;
@@ -84,9 +88,9 @@ void load(int percent)
     }
 
     {
-    MutexLockGuard guard(g_mutex);
-    g_busy = busy;
-    g_cond.notifyAll();
+      MutexLockGuard guard(g_mutex);
+      g_busy = busy;
+      g_cond.notifyAll();
     }
 
     CurrentThread::sleepUsec(10*1000); // 10 ms
@@ -94,6 +98,7 @@ void load(int percent)
   assert(count == percent);
 }
 
+// cpu曲线是固定的
 void fixed()
 {
   while (true)
@@ -102,6 +107,7 @@ void fixed()
   }
 }
 
+// cpu曲线是cos
 void cosine()
 {
   while (true)
@@ -112,6 +118,7 @@ void cosine()
     }
 }
 
+// cpu曲线是锯齿波
 void sawtooth()
 {
   while (true)
@@ -126,11 +133,11 @@ int main(int argc, char* argv[])
 {
   if (argc < 2)
   {
-    printf("Usage: %s [fctsz] [percent] [num_threads]\n", argv[0]);
+    printf("Usage: %s [fctsz] [percent] [num_threads]\n", argv[0]);  //./dummyload c 80 2
     return 0;
   }
-
   printf("pid %d\n", getpid());
+  
   findCycles();
 
   g_percent = argc > 2 ? atoi(argv[2]) : 43;
