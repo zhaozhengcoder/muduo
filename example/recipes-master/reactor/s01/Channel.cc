@@ -30,7 +30,7 @@ Channel::Channel(EventLoop* loop, int fdArg)
 
 void Channel::update()
 {
-  loop_->updateChannel(this);
+  loop_->updateChannel(this);   //EventLoop* loop_;  //void EventLoop::updateChannel(Channel* channel)
 }
 
 void Channel::handleEvent()

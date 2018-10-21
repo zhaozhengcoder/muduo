@@ -52,7 +52,7 @@ class Poller : boost::noncopyable
 
   EventLoop* ownerLoop_;
   PollFdList pollfds_;
-  ChannelMap channels_;
+  ChannelMap channels_;     //  typedef std::map<int, Channel*> ChannelMap;
 };
 
 }

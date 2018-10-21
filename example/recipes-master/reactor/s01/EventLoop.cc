@@ -54,6 +54,7 @@ void EventLoop::loop()
   {
     activeChannels_.clear();
     poller_->poll(kPollTimeMs, &activeChannels_);
+    
     for (ChannelList::iterator it = activeChannels_.begin();
         it != activeChannels_.end(); ++it)
     {
