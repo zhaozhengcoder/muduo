@@ -21,75 +21,71 @@ namespace muduo
 {
 namespace detail
 {
-
-int createTimerfd()
-{
-  int timerfd = ::timerfd_create(CLOCK_MONOTONIC,
-                                 TFD_NONBLOCK | TFD_CLOEXEC);
-  if (timerfd < 0)
+  int createTimerfd()
   {
-    LOG_SYSFATAL << "Failed in timerfd_create";
+    int timerfd = ::timerfd_create(CLOCK_MONOTONIC,
+                                  TFD_NONBLOCK | TFD_CLOEXEC);
+    if (timerfd < 0)
+    {
+      LOG_SYSFATAL << "Failed in timerfd_create";
+    }
+    return timerfd;
   }
-  return timerfd;
-}
 
-struct timespec howMuchTimeFromNow(Timestamp when)
-{
-  int64_t microseconds = when.microSecondsSinceEpoch()
-                         - Timestamp::now().microSecondsSinceEpoch();
-  if (microseconds < 100)
+  struct timespec howMuchTimeFromNow(Timestamp when)
   {
-    microseconds = 100;
+    int64_t microseconds = when.microSecondsSinceEpoch()
+                          - Timestamp::now().microSecondsSinceEpoch();
+    if (microseconds < 100)
+    {
+      microseconds = 100;
+    }
+    struct timespec ts;
+    ts.tv_sec = static_cast<time_t>(
+        microseconds / Timestamp::kMicroSecondsPerSecond);
+    ts.tv_nsec = static_cast<long>(
+        (microseconds % Timestamp::kMicroSecondsPerSecond) * 1000);
+    return ts;
   }
-  struct timespec ts;
-  ts.tv_sec = static_cast<time_t>(
-      microseconds / Timestamp::kMicroSecondsPerSecond);
-  ts.tv_nsec = static_cast<long>(
-      (microseconds % Timestamp::kMicroSecondsPerSecond) * 1000);
-  return ts;
-}
 
-void readTimerfd(int timerfd, Timestamp now)
-{
-  uint64_t howmany;
-  ssize_t n = ::read(timerfd, &howmany, sizeof howmany);
-  LOG_TRACE << "TimerQueue::handleRead() " << howmany << " at " << now.toString();
-  if (n != sizeof howmany)
+  void readTimerfd(int timerfd, Timestamp now)
   {
-    LOG_ERROR << "TimerQueue::handleRead() reads " << n << " bytes instead of 8";
+    uint64_t howmany;
+    ssize_t n = ::read(timerfd, &howmany, sizeof howmany);
+    LOG_TRACE << "TimerQueue::handleRead() " << howmany << " at " << now.toString();
+    if (n != sizeof howmany)
+    {
+      LOG_ERROR << "TimerQueue::handleRead() reads " << n << " bytes instead of 8";
+    }
   }
-}
 
-void resetTimerfd(int timerfd, Timestamp expiration)
-{
-  // wake up loop by timerfd_settime()
-  struct itimerspec newValue;
-  struct itimerspec oldValue;
-  bzero(&newValue, sizeof newValue);
-  bzero(&oldValue, sizeof oldValue);
-  newValue.it_value = howMuchTimeFromNow(expiration);
-  int ret = ::timerfd_settime(timerfd, 0, &newValue, &oldValue);
-  if (ret)
+  // 定时的主要逻辑功能实在这里实现的，通过设计一个fd在多少时间之后可读，来实现定时
+  void resetTimerfd(int timerfd, Timestamp expiration)
   {
-    LOG_SYSERR << "timerfd_settime()";
+    // wake up loop by timerfd_settime()
+    struct itimerspec newValue;
+    struct itimerspec oldValue;
+    bzero(&newValue, sizeof newValue);
+    bzero(&oldValue, sizeof oldValue);
+    newValue.it_value = howMuchTimeFromNow(expiration);
+    int ret = ::timerfd_settime(timerfd, 0, &newValue, &oldValue);
+    if (ret)
+    {
+      LOG_SYSERR << "timerfd_settime()";
+    }
   }
-}
-
 }
 }
 
 using namespace muduo;
 using namespace muduo::detail;
 
-TimerQueue::TimerQueue(EventLoop* loop)
-  : loop_(loop),
-    timerfd_(createTimerfd()),
-    timerfdChannel_(loop, timerfd_),
-    timers_()
+TimerQueue::TimerQueue(EventLoop* loop): loop_(loop),timerfd_(createTimerfd()),timerfdChannel_(loop, timerfd_),timers_()
 {
   timerfdChannel_.setReadCallback(
       boost::bind(&TimerQueue::handleRead, this));
   // we are always reading the timerfd, we disarm it with timerfd_settime.
+  // 把这个fd和channel建立映射，一旦fd可以读的时候，可以调用fd的回调函数
   timerfdChannel_.enableReading();
 }
 
@@ -125,9 +121,11 @@ void TimerQueue::handleRead()
   Timestamp now(Timestamp::now());
   readTimerfd(timerfd_, now);
 
+  //到期事件的vector
   std::vector<Entry> expired = getExpired(now);
 
   // safe to callback outside critical section
+  // 执行到期的事件
   for (std::vector<Entry>::iterator it = expired.begin();
       it != expired.end(); ++it)
   {
@@ -137,6 +135,8 @@ void TimerQueue::handleRead()
   reset(expired, now);
 }
 
+// 从tiemrs_里面，返回已经到期的timer，并通过vector返回。
+// 从原来的timers_里面，删除到期的事件
 std::vector<TimerQueue::Entry> TimerQueue::getExpired(Timestamp now)
 {
   std::vector<Entry> expired;
@@ -149,10 +149,10 @@ std::vector<TimerQueue::Entry> TimerQueue::getExpired(Timestamp now)
   return expired;
 }
 
+// 给用即将到期的下一个事件的时间，设置timer
 void TimerQueue::reset(const std::vector<Entry>& expired, Timestamp now)
 {
   Timestamp nextExpire;
-
   for (std::vector<Entry>::const_iterator it = expired.begin();
       it != expired.end(); ++it)
   {
@@ -167,12 +167,10 @@ void TimerQueue::reset(const std::vector<Entry>& expired, Timestamp now)
       delete it->second;
     }
   }
-
   if (!timers_.empty())
   {
     nextExpire = timers_.begin()->second->expiration();
   }
-
   if (nextExpire.valid())
   {
     resetTimerfd(timerfd_, nextExpire);

@@ -47,7 +47,6 @@ class TimerQueue : boost::noncopyable
   // void cancel(TimerId timerId);
 
  private:
-
   // FIXME: use unique_ptr<Timer> instead of raw pointers.
   typedef std::pair<Timestamp, Timer*> Entry;
   typedef std::set<Entry> TimerList;
@@ -59,12 +58,11 @@ class TimerQueue : boost::noncopyable
   void reset(const std::vector<Entry>& expired, Timestamp now);
 
   bool insert(Timer* timer);
-
   EventLoop* loop_;
-  const int timerfd_;
+  const int timerfd_;     // 理解这个timerfd的工作原理很重要
   Channel timerfdChannel_;
   // Timer list sorted by expiration
-  TimerList timers_;
+  TimerList timers_;     //  typedef std::set<Entry> TimerList;
 };
 
 }
