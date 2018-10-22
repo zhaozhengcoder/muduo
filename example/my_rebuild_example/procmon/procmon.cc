@@ -517,7 +517,7 @@ bool processExists(pid_t pid)
   return ::access(filename, R_OK) == 0;
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char* argv[])  //./a.out pid prot    pid 表示要监听的pid，port表示要监听的端口
 {
   if (argc < 3)
   {
