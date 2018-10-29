@@ -4,6 +4,7 @@
 
 class Observable;
 
+// 观察者
 class Observer
 {
  public:
@@ -16,6 +17,8 @@ class Observer
   Observable* subject_;
 };
 
+
+// 观察的东西
 class Observable
 {
  public:
@@ -31,12 +34,18 @@ class Observable
         x->update(); // (3)
       }
     }
+
+    if(observers_.size() == 0)
+    {
+      printf("[debug] observers_.size == 0 \n");
+    }
   }
 
  private:
   std::vector<Observer*> observers_;
 };
 
+// Observer 类的成员函数的实现 
 Observer::~Observer()
 {
   subject_->unregister(this);
@@ -48,6 +57,7 @@ void Observer::observe(Observable* s)
   subject_ = s;
 }
 
+// Observable 类成员函数的实现
 void Observable::register_(Observer* x)
 {
   observers_.push_back(x);
@@ -80,5 +90,7 @@ int main()
   p->observe(&subject);
   subject.notifyObservers();
   delete p;
+  
+  printf("\n");
   subject.notifyObservers();
 }
