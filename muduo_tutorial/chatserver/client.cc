@@ -16,10 +16,10 @@ using namespace muduo::net;
 
 class TimeClient : boost::noncopyable
 {
- public:
-  TimeClient(EventLoop* loop, const InetAddress& serverAddr)
-    : loop_(loop),
-      client_(loop, serverAddr, "TimeClient")
+public:
+  TimeClient(EventLoop *loop, const InetAddress &serverAddr)
+      : loop_(loop),
+        client_(loop, serverAddr, "TimeClient")
   {
     client_.setConnectionCallback(
         boost::bind(&TimeClient::onConnection, this, _1));
@@ -33,12 +33,11 @@ class TimeClient : boost::noncopyable
     client_.connect();
   }
 
- private:
-
-  EventLoop* loop_;
+private:
+  EventLoop *loop_;
   TcpClient client_;
 
-  void onConnection(const TcpConnectionPtr& conn)
+  void onConnection(const TcpConnectionPtr &conn)
   {
     LOG_INFO << conn->localAddress().toIpPort() << " -> "
              << conn->peerAddress().toIpPort() << " is "
@@ -49,7 +48,6 @@ class TimeClient : boost::noncopyable
     muduo::net::Buffer buf;
     buf.append(message.data(), message.size());
 
-
     conn->send(&buf);
     if (!conn->connected())
     {
@@ -57,7 +55,7 @@ class TimeClient : boost::noncopyable
     }
   }
 
-  void onMessage(const TcpConnectionPtr& conn, Buffer* buf, Timestamp receiveTime)
+  void onMessage(const TcpConnectionPtr &conn, Buffer *buf, Timestamp receiveTime)
   {
     // if (buf->readableBytes() >= sizeof(int32_t))
     // {
@@ -73,24 +71,23 @@ class TimeClient : boost::noncopyable
     //   LOG_INFO << conn->name() << " no enough data " << buf->readableBytes()
     //            << " at " << receiveTime.toFormattedString();
     // }
-    std::cout<<buf->readableBytes()<<std::endl;
-    if(buf->readableBytes() >= 4) // kHeaderLen == 4
+    std::cout << buf->readableBytes() << std::endl;
+    if (buf->readableBytes() >= 4) // kHeaderLen == 4
     {
-        const void* data = buf->peek();
-        int32_t be32 = *static_cast<const int32_t*>(data); // SIGBUS
-        const int32_t len = muduo::net::sockets::networkToHost32(be32);
-        std::cout<<"[msg len] "<<len<<std::endl;
+      const void *data = buf->peek();
+      int32_t be32 = *static_cast<const int32_t *>(data); // SIGBUS
+      const int32_t len = muduo::net::sockets::networkToHost32(be32);
+      std::cout << "[msg len] " << len << std::endl;
 
-
-        buf->retrieve(4);
-        muduo::string message(buf->peek(), len);  
-        buf->retrieve(len);
-        std::cout<<"[msg ] "<<message<<std::endl;
+      buf->retrieve(4);
+      muduo::string message(buf->peek(), len);
+      buf->retrieve(len);
+      std::cout << "[msg ] " << message << std::endl;
     }
   }
 };
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
   LOG_INFO << "pid = " << getpid();
   if (argc > 1)
@@ -107,4 +104,3 @@ int main(int argc, char* argv[])
     printf("Usage: %s host_ip\n", argv[0]);
   }
 }
-

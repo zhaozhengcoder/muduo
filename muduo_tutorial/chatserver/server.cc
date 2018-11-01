@@ -15,7 +15,6 @@
 using namespace muduo;
 using namespace muduo::net;
 
-
 // 给msg前面加上一个int的头部，表示消息的长度 -> tcp 分包
 std::shared_ptr<char> make_msg_buff(string msg)
 {
@@ -57,7 +56,7 @@ void EchoServer::onConnection(const TcpConnectionPtr &conn)
     connections_.insert(conn);
 }
 
-void mysend(muduo::net::TcpConnection* conn, const muduo::StringPiece& message)
+void mysend(muduo::net::TcpConnection *conn, const muduo::StringPiece &message)
 {
     muduo::net::Buffer buf;
     buf.append(message.data(), message.size());
@@ -73,7 +72,6 @@ void EchoServer::onMessage(const TcpConnectionPtr &conn, Buffer *buf, Timestamp 
     std::cout << conn->name() << " recv " << msg.size() << " bytes at " << time.toString() << std::endl;
     std::cout << msg << std::endl;
 
-
     for (auto iter = connections_.begin(); iter != connections_.end(); iter++)
     {
         // std::shared_ptr<char> buff = make_msg_buff(msg);
@@ -81,7 +79,7 @@ void EchoServer::onMessage(const TcpConnectionPtr &conn, Buffer *buf, Timestamp 
         // void * p_buff = static_cast<void *>(buff.get());
         // std::cout<<"send size : "<<buff_len<<std::endl;
         // (*iter)->send(p_buff, buff_len);
-        mysend(get_pointer(*iter),msg);
+        mysend(get_pointer(*iter), msg);
     }
     //conn->send(msg);
 }

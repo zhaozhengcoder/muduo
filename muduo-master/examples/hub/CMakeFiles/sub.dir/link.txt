@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/sub.dir/sub.cc.o  -o sub  -L/home/zhaozheng/code_test/muduo/muduo-master/examples/hub -rdynamic libmuduo_pubsub.a -lmuduo_net 

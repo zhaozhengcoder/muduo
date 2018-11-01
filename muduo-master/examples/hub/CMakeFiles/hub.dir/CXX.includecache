@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/zhaozheng/code_test/muduo/muduo-master/examples/hub/codec.cc
+codec.h
+/home/zhaozheng/code_test/muduo/muduo-master/examples/hub/codec.h
+
+/home/zhaozheng/code_test/muduo/muduo-master/examples/hub/codec.h
+muduo/base/Types.h
+-
+muduo/net/Buffer.h
+-
+boost/noncopyable.hpp
+-
+
+/home/zhaozheng/code_test/muduo/muduo-master/examples/hub/hub.cc
+codec.h
+/home/zhaozheng/code_test/muduo/muduo-master/examples/hub/codec.h
+muduo/base/Logging.h
+-
+muduo/net/EventLoop.h
+-
+muduo/net/TcpServer.h
+-
+boost/bind.hpp
+-
+map
+-
+set
+-
+stdio.h
+-
+
