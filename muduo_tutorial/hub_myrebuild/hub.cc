@@ -170,7 +170,7 @@ class PubSubServer
 int main()
 {
     EventLoop loop;
-    uint16_t port = 6666;
+    uint16_t port = 6667;
 
     PubSubServer server(&loop, InetAddress(port));
     server.start();

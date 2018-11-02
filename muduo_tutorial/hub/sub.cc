@@ -43,7 +43,9 @@ int main(int argc, char *argv[])
         {
             string hostip = hostport.substr(0, colon);
             uint16_t port = static_cast<uint16_t>(atoi(hostport.c_str() + colon + 1));
+            
             // g_topics 里面存放订阅的主题
+            // 一个链接可以订阅很多主题
             for (int i = 2; i < argc; ++i)
             {
                 g_topics.push_back(argv[i]);

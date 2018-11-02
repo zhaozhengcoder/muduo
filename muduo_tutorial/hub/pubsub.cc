@@ -55,6 +55,7 @@ bool PubSubClient::publish(const string &topic, const string &content)
 void PubSubClient::onConnection(const TcpConnectionPtr &conn)
 {
     //如果是建立连接
+    //注意，建立链接的时候，是不会主动发送消息的，发消息的动作是通过回调函数完成的
     if (conn->connected())
     {
         conn_ = conn;
@@ -72,7 +73,7 @@ void PubSubClient::onConnection(const TcpConnectionPtr &conn)
     }
 }
 
-void PubSubClient::onMessage(const TcpConnectionPtr &conn,Buffer *buf,Timestamp receiveTime)
+void PubSubClient::onMessage(const TcpConnectionPtr &conn, Buffer *buf, Timestamp receiveTime)
 {
     //如果收到消息
     ParseResult result = kSuccess;
@@ -84,10 +85,10 @@ void PubSubClient::onMessage(const TcpConnectionPtr &conn,Buffer *buf,Timestamp 
         result = parseMessage(buf, &cmd, &topic, &content);
         if (result == kSuccess)
         {
-            std::cout<<"cmd : "<<cmd<<" , topic : "<<topic<<" , content : "<<content<<std::endl;
+            std::cout << "cmd : " << cmd << " , topic : " << topic << " , content : " << content << std::endl;
             if (cmd == "pub" && subscribeCallback_)
             {
-                std::cout<<"exec subscribeCallback_"<<std::endl;
+                std::cout << "exec subscribeCallback_" << std::endl;
                 subscribeCallback_(topic, content, receiveTime);
             }
         }

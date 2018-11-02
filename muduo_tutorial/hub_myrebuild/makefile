@@ -14,15 +14,15 @@ CXXFLAGS = -g -O0 -Wall -Wextra -Werror \
 LDFLAGS = -L$(MUDUO_LIBRARY)  -lmuduo_net  -lmuduo_base -lpthread -lrt
 
 # lmuduo_inspect 
-all: hub
+all: hub sub
 clean:
 	rm -f hub core
 
 hub: $(SRC)/hub.cc codec.cc
 	g++ $(CXXFLAGS) -o $@ $^  $(LDFLAGS)
 
-# sub: $(SRC)/sub.cc codec.cc pubsub.cc
-# 	g++ $(CXXFLAGS) -o $@ $^  $(LDFLAGS)
+sub: $(SRC)/sub.cc codec.cc pubsub.cc
+	g++ $(CXXFLAGS) -o $@ $^  $(LDFLAGS)
 
 # pub: $(SRC)/pub.cc codec.cc pubsub.cc
 # 	g++ $(CXXFLAGS) -o $@ $^  $(LDFLAGS)
