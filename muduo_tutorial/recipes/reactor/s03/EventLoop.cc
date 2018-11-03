@@ -14,7 +14,7 @@
 #include "logging/Logging.h"
 
 #include <boost/bind.hpp>
-
+#include <stdio.h>
 #include <assert.h>
 #include <sys/eventfd.h>
 
