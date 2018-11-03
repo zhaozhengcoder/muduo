@@ -1,2 +1,0 @@
-20180924 08:19:50.508627Z 10869 INFO  pid = 10869, tid = 10869 - echo.cc:78
-20180924 08:21:28.164690Z 10869 INFO  TcpServer::newConnection [EchoServer] - new connection [EchoServer-0.0.0.0:2007#1] from 127.0.0.1:13203 - TcpServer.cc:83
