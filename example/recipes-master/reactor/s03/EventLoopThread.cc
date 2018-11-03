@@ -8,7 +8,7 @@
 #include "EventLoopThread.h"
 
 #include "EventLoop.h"
-
+#include <iostream>
 #include <boost/bind.hpp>
 
 using namespace muduo;
@@ -33,11 +33,11 @@ EventLoop* EventLoopThread::startLoop()
 {
   assert(!thread_.started());
   thread_.start();
-
   {
     MutexLockGuard lock(mutex_);
     while (loop_ == NULL)
     {
+      std::cout<<"wait..."<<std::endl;
       cond_.wait();
     }
   }
@@ -48,7 +48,7 @@ EventLoop* EventLoopThread::startLoop()
 void EventLoopThread::threadFunc()
 {
   EventLoop loop;
-
+  std::cout<<"notify ... "<<std::endl;
   {
     MutexLockGuard lock(mutex_);
     loop_ = &loop;

@@ -14,7 +14,7 @@
 #include "logging/Logging.h"
 
 #include <boost/bind.hpp>
-#include <stdio.h>
+
 #include <assert.h>
 #include <sys/eventfd.h>
 
@@ -34,8 +34,8 @@ static int createEventfd()
   return evtfd;
 }
 
-EventLoop::EventLoop()
-  : looping_(false),
+EventLoop::EventLoop():
+    looping_(false),
     quit_(false),
     callingPendingFunctors_(false),
     threadId_(CurrentThread::tid()),
@@ -47,16 +47,17 @@ EventLoop::EventLoop()
   LOG_TRACE << "EventLoop created " << this << " in thread " << threadId_;
   if (t_loopInThisThread)
   {
-    LOG_FATAL << "Another EventLoop " << t_loopInThisThread
-              << " exists in this thread " << threadId_;
+    LOG_FATAL << "Another EventLoop " << t_loopInThisThread << " exists in this thread " << threadId_;
   }
   else
   {
     t_loopInThisThread = this;
   }
-  wakeupChannel_->setReadCallback(
-      boost::bind(&EventLoop::handleRead, this));
+
+  // wakeupfd的回调函数是handleRead
+  wakeupChannel_->setReadCallback(boost::bind(&EventLoop::handleRead, this));
   // we are always reading the wakeupfd
+  // 关注这个fd的可读事件
   wakeupChannel_->enableReading();
 }
 
@@ -78,11 +79,12 @@ void EventLoop::loop()
   {
     activeChannels_.clear();
     pollReturnTime_ = poller_->poll(kPollTimeMs, &activeChannels_);
-    for (ChannelList::iterator it = activeChannels_.begin();
-        it != activeChannels_.end(); ++it)
+    for (ChannelList::iterator it = activeChannels_.begin();it != activeChannels_.end(); ++it)
     {
       (*it)->handleEvent();
     }
+
+    // 执行任务队列里面的函数
     doPendingFunctors();
   }
 
@@ -101,7 +103,6 @@ void EventLoop::quit()
 
 void EventLoop::runInLoop(const Functor& cb)
 {
-  printf("[debug] runInLoop(): pid = %d, tid = %d\n", getpid(), muduo::CurrentThread::tid());
   if (isInLoopThread())
   {
     printf("[debug] runInLoop() : isInLoopThread \n");
@@ -117,10 +118,11 @@ void EventLoop::runInLoop(const Functor& cb)
 void EventLoop::queueInLoop(const Functor& cb)
 {
   {
-  MutexLockGuard lock(mutex_);
-  pendingFunctors_.push_back(cb);
+    MutexLockGuard lock(mutex_);
+    pendingFunctors_.push_back(cb);
   }
 
+  // 如果调用loop的对象不是本线程，并且callingPendingFunctors_，那么调用wakeup函数
   if (!isInLoopThread() || callingPendingFunctors_)
   {
     wakeup();
@@ -158,6 +160,7 @@ void EventLoop::abortNotInLoopThread()
             << ", current thread id = " <<  CurrentThread::tid();
 }
 
+// 向wakeupfd里面写一个字节的东西来唤醒这个fd
 void EventLoop::wakeup()
 {
   uint64_t one = 1;
@@ -178,6 +181,9 @@ void EventLoop::handleRead()
   }
 }
 
+
+// 执行任务队列里面的函数
+// 设计swap的函数，是想让临界区减少
 void EventLoop::doPendingFunctors()
 {
   std::vector<Functor> functors;
