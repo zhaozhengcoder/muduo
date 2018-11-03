@@ -2,7 +2,7 @@ MUDUO_DIRECTORY ?= $(HOME)/code_test/muduo/build/release-install
 #MUDUO_DIRECTORY ?= $(HOME)/build/install
 MUDUO_INCLUDE = $(MUDUO_DIRECTORY)/include
 MUDUO_LIBRARY = $(MUDUO_DIRECTORY)/lib
-SRC = ../ttcp
+SRC = ./
 
 MUDDUO_EXPAMLE_LIB = $(HOME)/code_test/muduo/muduo-master
 
