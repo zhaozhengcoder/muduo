@@ -21,49 +21,47 @@ class Poller;
 
 class EventLoop : boost::noncopyable
 {
- public:
+  public:
+    EventLoop();
 
-  EventLoop();
+    // force out-line dtor, for scoped_ptr members.
+    ~EventLoop();
 
-  // force out-line dtor, for scoped_ptr members.
-  ~EventLoop();
+    ///
+    /// Loops forever.
+    ///
+    /// Must be called in the same thread as creation of the object.
+    ///
+    void loop();
 
-  ///
-  /// Loops forever.
-  ///
-  /// Must be called in the same thread as creation of the object.
-  ///
-  void loop();
+    void quit();
 
-  void quit();
+    // internal use only
+    void updateChannel(Channel *channel);
+    // void removeChannel(Channel* channel);
 
-  // internal use only
-  void updateChannel(Channel* channel);
-  // void removeChannel(Channel* channel);
-
-  void assertInLoopThread()
-  {
-    if (!isInLoopThread())
+    void assertInLoopThread()
     {
-      abortNotInLoopThread();
+        if (!isInLoopThread())
+        {
+            abortNotInLoopThread();
+        }
     }
-  }
 
-  bool isInLoopThread() const { return threadId_ == CurrentThread::tid(); }
+    bool isInLoopThread() const { return threadId_ == CurrentThread::tid(); }
 
- private:
+  private:
+    void abortNotInLoopThread();
 
-  void abortNotInLoopThread();
+    typedef std::vector<Channel *> ChannelList;
 
-  typedef std::vector<Channel*> ChannelList;
-
-  bool looping_; /* atomic */
-  bool quit_; /* atomic */
-  const pid_t threadId_;
-  boost::scoped_ptr<Poller> poller_;
-  ChannelList activeChannels_;
+    bool looping_; /* atomic */
+    bool quit_;    /* atomic */
+    const pid_t threadId_;
+    boost::scoped_ptr<Poller> poller_;
+    ChannelList activeChannels_;
 };
 
-}
+} // namespace muduo
 
-#endif  // MUDUO_NET_EVENTLOOP_H
+#endif // MUDUO_NET_EVENTLOOP_H

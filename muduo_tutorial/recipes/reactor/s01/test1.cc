@@ -4,23 +4,23 @@
 
 void threadFunc()
 {
-  printf("threadFunc(): pid = %d, tid = %d\n",
-         getpid(), muduo::CurrentThread::tid());
+    printf("threadFunc(): pid = %d, tid = %d\n",
+           getpid(), muduo::CurrentThread::tid());
 
-  muduo::EventLoop loop;
-  loop.loop();
+    muduo::EventLoop loop;
+    loop.loop();
 }
 
 int main()
 {
-  printf("main(): pid = %d, tid = %d\n",
-         getpid(), muduo::CurrentThread::tid());
+    printf("main(): pid = %d, tid = %d\n",
+           getpid(), muduo::CurrentThread::tid());
 
-  muduo::EventLoop loop;
+    muduo::EventLoop loop;
 
-  muduo::Thread thread(threadFunc);
-  thread.start();
+    muduo::Thread thread(threadFunc);
+    thread.start();
 
-  loop.loop();
-  pthread_exit(NULL);
+    loop.loop();
+    pthread_exit(NULL);
 }
