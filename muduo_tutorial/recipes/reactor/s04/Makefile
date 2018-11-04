@@ -10,7 +10,7 @@ LIB_SRC = 			\
 	Timer.cc		\
 	TimerQueue.cc
 
-BINARIES = test7
+BINARIES = test7 test7_1 test7_2
 
 all: $(BINARIES)
 
@@ -24,3 +24,5 @@ include ../reactor.mk
 # test5: test5.cc
 # test6: test6.cc
 test7: test7.cc
+test7_1: test7_1.cc
+test7_2: test7_2.cc

@@ -3,16 +3,24 @@
 #include "InetAddress.h"
 #include "SocketsOps.h"
 #include <stdio.h>
+#include <time.h>
 
-void newConnection(int sockfd, const muduo::InetAddress& peerAddr)
+
+//test7_1.cc echo一个时间
+void newConnection(int sockfd, const muduo::InetAddress &peerAddr) 
 {
-    printf("newConnection(): accepted a new connection from %s\n",
-          peerAddr.toHostPort().c_str());
-    ::write(sockfd, "How are you?\n", 13);
+    printf("newConnection(): accepted a new connection from %s\n", peerAddr.toHostPort().c_str());
+    
+	time_t t;
+	struct tm *timeinfo;  //结构体
+	time(&t);
+    timeinfo = localtime(&t);
+
+    ::write(sockfd, asctime(timeinfo), 13);
     muduo::sockets::close(sockfd);
 }
 
-int main()
+int main() 
 {
     printf("main(): pid = %d\n", getpid());
 
@@ -27,6 +35,6 @@ int main()
     // 如果上面有事件可读的时候，会调用它的回调函数
     acceptor.listen();
 
-    // 开始loop 
+    // 开始loop
     loop.loop();
 }
