@@ -58,6 +58,6 @@ void EventLoopThread::threadFunc()
         cond_.notify();
     }
 
-    loop.loop();
+    loop. ();
     //assert(exiting_);
 }

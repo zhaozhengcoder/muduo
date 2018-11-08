@@ -23,8 +23,13 @@ int main()
 
     //这个也是同样的道理
     loop->runAfter(2, runInThread);
-    sleep(3);
-    loop->quit();
+    //sleep(3);
+    //loop->quit();
+
+    while(1)
+    {
+        
+    }
 
     printf("exit main().\n");
 }

@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <sys/eventfd.h>
+#include <iostream>
 
 using namespace muduo;
 
@@ -85,7 +86,9 @@ void EventLoop::loop()
     }
 
     // 执行任务队列里面的函数
+    std::cout<<"loop - begin "<<std::endl;
     doPendingFunctors();
+    std::cout<<"loop - end "<<std::endl;
   }
 
   LOG_TRACE << "EventLoop " << this << " stop looping";
