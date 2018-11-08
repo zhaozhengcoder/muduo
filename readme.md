@@ -4,19 +4,17 @@
 
 
 * 安装
-
+    ```
     https://github.com/chenshuo/muduo 在这里拉下代码。
 
-    第一步，安装cmake和boost
-    ```
+    # 第一步，安装cmake和boost
+
     sudo apt-get install cmake
 
     # 安装boost
     sudo apt-get install libboost-dev libboost-test-dev
-    ```
 
-    第二步
-    ```
+    # 第二步
     cd muduo
     ./build.sh -j2
     ./build.sh install
@@ -37,64 +35,45 @@
     ```
 
 
-**最近正在学习muduo中，学习中遇到的问题和收获，后面慢慢更新**
+## 前置技能
 
 * 前置技能，看这本书之前，应该熟悉socket基本的api和linux下c++的编程。
 
-    这里有一个ttcp的例子，是用原生的socket api 写的。（里面还有一个nc的例子，也可以看看）
+    1. 这里有一个ttcp的例子，是用原生的socket api 写的。
 
-    https://github.com/zhaozhengcoder/muduo/tree/master/muduo_tutorial/ttcp
+        https://github.com/zhaozhengcoder/muduo/tree/master/muduo_tutorial/ttcp
 
-* 在看源码之前，看几个小demo，熟悉一下muduo的核心代码的逻辑。
+    2. 这是一个netcat的例子，这个稍微封装了一下。很专业一点。
 
-    目录：
-
-    1. [muduo的reator的核心结构](#muduo的reator的核心结构)
-
-    2. [muduo的定时器的实现](#muduo的定时器的实现)
-
-    3. muduo的tcp的网络库的实现
-
-    4. muduo的io模型
-
-### muduo的reator的核心结构
-
-主要分成三个类EventLoop，Channel，和Poller类。 EventLoop类的数据成员包括Poller对象，Channel类对象的初始化的时候，需要EventLoop对象。
-
-**EventLoop类**基本上什么都不做，只负责提供一个loop函数，这里面是一个死循环。但是，EventLoop类提供了很多函数，来保证一个线程最多拥有一个loop对象。
-
-**Channel类**，每个channel对象始终只属于一个eventloop，每个channel对象从始至终只负责一个文件描述符fd的io事件的分发，但是它不拥有这个fd，也不会析构的时候关闭这个fd。
-
-**Poller类**是io多路复用的封装。
-
-一个demo的实例：
-
-https://github.com/zhaozhengcoder/muduo/tree/master/example/recipes-master/reactor/s01
+        https://github.com/zhaozhengcoder/muduo/tree/master/example/my_rebuild_example/netcat
 
 
-### muduo的定时器的实现
+* 在看源码之前，先思考几个问题，如何要自己开发一下网络库，对于下面的问题，如何回答？
 
-muduo定时器的定时的功能是给一个fd，设置一个在多少秒之后可读的一个提醒，来实现tiemr的。
 
-```
-// 定时的主要逻辑功能实在这里实现的，通过设计一个fd在多少时间之后可读，来实现定时
-void resetTimerfd(int timerfd, Timestamp expiration)
-{
-    // wake up loop by timerfd_settime()
-    struct itimerspec newValue;
-    struct itimerspec oldValue;
-    bzero(&newValue, sizeof newValue);
-    bzero(&oldValue, sizeof oldValue);
-    newValue.it_value = howMuchTimeFromNow(expiration);
-    int ret = ::timerfd_settime(timerfd, 0, &newValue, &oldValue);
-    if (ret)
-    {
-        LOG_SYSERR << "timerfd_settime()";
-    }
-}
-```
+    1. [muduo的io模型是什么](##muduo的reator的核心结构)
 
-具体细节，可以看一个demo ：
+    2. [muduo的多线程体现在什么地方](#muduo的定时器的实现)
 
-!(链接)[https://github.com/zhaozhengcoder/muduo/tree/master/example/recipes-master/reactor/s02]   下面test4.cc 
+    3. [muduo的主线程accepte的fd如何分发给其他线程？]
 
+    4. [muduo的定时器如何实现？]
+
+    5. [muduo如何限制连接的数量？]
+
+    6. [muduo如何设计buffer？]
+
+    7. [muduo的定时器是如何设计的？]
+
+    8. [如何安全的关闭tcp连接，能不能直接close，如何直接close会发生什么？]
+
+    9. [muduo是如何 线程安全的对 对象的声明周期进行管理？]
+
+
+* 其他的一些关于收获
+
+    1. 使用shard_ptr 和 weak_ptr 进行资源管理
+
+    2. 使用bind注册回调函数，比用虚函数的方式实现，更舒服。
+
+**最近正在学习muduo中，学习中遇到的问题和收获，后面慢慢更新。**
