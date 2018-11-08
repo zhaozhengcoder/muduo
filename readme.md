@@ -1,6 +1,7 @@
 # MUDUO 
 
-学习muduo源码的仓库
+这个repo是学习c++ 网路库muduo的。里面的代码基本上是从muduo的仓库上面来下来的，一些个别的代码是为了理解和学习，我自己修改的。
+
 
 
 * 安装
@@ -75,5 +76,15 @@
     1. 使用shard_ptr 和 weak_ptr 进行资源管理
 
     2. 使用bind注册回调函数，比用虚函数的方式实现，更舒服。
+
+
+
+
+## muduo的核心框架的实现过程
+
+作者很贴心的提供了一个recipes的目录，把核心框架的实现过程拆分了出来。
+
+连接：https://github.com/zhaozhengcoder/muduo/tree/master/muduo_tutorial/recipes/reactor
+
 
 **最近正在学习muduo中，学习中遇到的问题和收获，后面慢慢更新。**
