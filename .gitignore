@@ -1,3 +1,7 @@
 *.swp
 .vscode
 *.out
+*.o
+*.d
+*.core
+*.log
