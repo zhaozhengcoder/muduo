@@ -1,5 +1,5 @@
-MUDUO_DIRECTORY ?= $(HOME)/code_test/muduo/build/release-install
-#MUDUO_DIRECTORY ?= $(HOME)/build/install
+include ../inc.mk
+
 MUDUO_INCLUDE = $(MUDUO_DIRECTORY)/include
 MUDUO_LIBRARY = $(MUDUO_DIRECTORY)/lib
 SRC = ./
